@@ -33,3 +33,22 @@ void addDoctor() {
     cout << "Doctor Added Successfully!\n";
 }
 
+void viewDoctor() {
+    ifstream file("doctors.csv");
+
+    if (!file) {
+        cout << "File not found!\n";
+        return;
+    }
+
+    string line;
+    cout << "\nID, Name, Education, Specialization, Category\n";
+
+    while (getline(file, line)) {
+        if (!line.empty())
+            cout << line << endl;
+    }
+
+    file.close();
+}
+
