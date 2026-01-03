@@ -21,3 +21,13 @@ void add() {
     file.close();
     cout << "The medicine is added successfully\n";
 }
+
+void view() {
+    string line;
+    ifstream file("pharmacy.csv", ios::in);
+    while (getline(file, line)) {
+        cout << line << endl;
+    }
+    file.close();
+}
+
