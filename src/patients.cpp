@@ -75,3 +75,50 @@ void viewPatient() {
         cout << "Patient not found.\n";
     }
 }
+
+void updatePatient()
+{
+    ifstream file("patients.csv");
+    ofstream temp("temp.csv");
+
+    string id, name, age, gender, contact, disease, searchId;
+    char comma;
+    bool found = false;
+
+    cout << "Enter Patient ID to update: ";
+    cin >> searchId;
+
+    while (file >> id >> comma >> name >> comma >> age >> comma
+                >> gender >> comma >> contact >> comma >> disease)
+    {
+        if (id == searchId)
+        {
+            cout << "Enter New Name: ";
+            cin >> name;
+            cout << "Enter New Age: ";
+            cin >> age;
+            cout << "Enter New Gender: ";
+            cin >> gender;
+            cout << "Enter New Contact: ";
+            cin >> contact;
+            cout << "Enter New Disease: ";
+            cin >> disease;
+
+            found = true;
+        }
+
+        temp << id << "," << name << "," << age << ","
+             << gender << "," << contact << "," << disease << endl;
+    }
+
+    file.close();
+    temp.close();
+
+    remove("patients.csv");
+    rename("temp.csv", "patients.csv");
+
+    if (found)
+        cout << "Patient record updated successfully.\n";
+    else
+        cout << "Patient not found.\n";
+}
