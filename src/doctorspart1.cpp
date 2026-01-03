@@ -33,3 +33,55 @@ void addDoctor() {
     cout << "Doctor Added Successfully!\n";
 }
 
+void viewDoctor() {
+    ifstream file("doctors.csv");
+
+    if (!file) {
+        cout << "File not found!\n";
+        return;
+    }
+
+    string line;
+    cout << "\nID, Name, Education, Specialization, Category\n";
+
+    while (getline(file, line)) {
+        if (!line.empty())
+            cout << line << endl;
+    }
+
+    file.close();
+}
+
+void deleteDoctor() {
+    ifstream file("doctors.csv");
+    ofstream temp("temp.csv");
+
+    int id, did;
+    bool found = false;
+    string line;
+
+    cout << "Enter Doctor ID to delete: ";
+    cin >> id;
+
+    while (getline(file, line)) {
+        stringstream ss(line);
+        ss >> did;
+
+        if (did != id) {
+            temp << line << endl;
+        } else {
+            found = true;
+        }
+    }
+
+    file.close();
+    temp.close();
+
+    remove("doctors.csv");
+    rename("temp.csv", "doctors.csv");
+
+    if (found)
+        cout << "Doctor Deleted Successfully!\n";
+    else
+        cout << "Doctor Not Found!\n";
+}
