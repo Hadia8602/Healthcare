@@ -76,3 +76,37 @@ void editLabTest() {
     else
         cout << "Test ID not found.\n";
 }
+void updateLabTest() {
+    ifstream file("labreport.csv");
+    ofstream temp("temp.csv");
+    string searchtestid;
+    cout << "Please enter test ID to update: ";
+    cin >> searchtestid;
+    cin.ignore();
+    string testid, patientname, testname, testdate, status;
+    bool exist = false;
+
+    while(getline(file, testid, ',') &&
+          getline(file, patientname, ',') &&
+          getline(file, testname, ',') &&
+          getline(file, testdate, ',') &&
+          getline(file, status)) 
+    {
+        if(testid == searchtestid) {
+            exist = true;
+            status = "completed";
+        }
+        temp << testid << "," << patientname << "," << testname << ","
+             << testdate << "," << status << endl;
+    }
+
+    file.close();
+    temp.close();
+    remove("labreport.csv");
+    rename("temp.csv", "labreport.csv");
+
+    if(exist)
+        cout << "Lab test status updated.\n";
+    else
+        cout << "Test ID not found.\n";
+}
