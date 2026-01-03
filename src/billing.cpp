@@ -127,4 +127,49 @@ void updateBill()
         cout << "Bill updated successfully!\n";
     else
         cout << "Bill ID not found!\n";
+}void deleteBill()
+{
+    ifstream file("billing.csv");
+    ofstream temp("temp.csv");
+
+    int bill_id, searchid;
+    string patient_name;
+    float service, doctor, pharmacy, lab, room, total;
+
+    cout << "ENTER BILL ID TO DELETE: ";
+    cin >> searchid;
+
+    while(file >> bill_id)
+    {
+        file.ignore();
+        getline(file, patient_name, ',');
+        file >> service; file.ignore();
+        file >> doctor; file.ignore();
+        file >> pharmacy; file.ignore();
+        file >> lab; file.ignore();
+        file >> room; file.ignore();
+        file >> total;
+        file.ignore(1000, '\n');
+
+        if(bill_id != searchid)
+        {
+            temp << bill_id << ","
+                 << patient_name << ","
+                 << service << ","
+                 << doctor << ","
+                 << pharmacy << ","
+                 << lab << ","
+                 << room << ","
+                 << total << "\n";
+        }
+    }
+
+    file.close();
+    temp.close();
+    remove("billing.csv");
+    rename("temp.csv", "billing.csv");
+
+    cout << "Bill deleted successfully!\n";
 }
+
+
