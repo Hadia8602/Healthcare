@@ -134,3 +134,27 @@ void updateDoctor() {
     else
         cout << "Doctor Not Found!\n";
 }
+
+void doctorMenu() {
+    int choice;
+
+    do {
+        cout << "\n===== Doctor Management System =====\n";
+        cout << "1. Add Doctor\n";
+        cout << "2. View Doctors\n";
+        cout << "3. Update Doctor\n";
+        cout << "4. Delete Doctor\n";
+        cout << "5. Back to Main Menu\n";
+        cout << "Enter Choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1: addDoctor(); break;
+            case 2: viewDoctor(); break;
+            case 3: updateDoctor(); break;
+            case 4: deleteDoctor(); break;
+            case 5: break;
+            default: cout << "Invalid Choice!\n";
+        }
+    } while (choice != 5);
+}
