@@ -122,3 +122,39 @@ void updatePatient()
     else
         cout << "Patient not found.\n";
 }
+
+void deletePatient()
+{
+    ifstream file("patients.csv");
+    ofstream temp("temp.csv");
+
+    string id, name, age, gender, contact, disease, searchId;
+    char comma;
+    bool found = false;
+
+    cout << "Enter Patient ID to delete: ";
+    cin >> searchId;
+
+    while (file >> id >> comma >> name >> comma >> age >> comma
+                >> gender >> comma >> contact >> comma >> disease)
+    {
+        if (id == searchId) {
+            found = true;
+            continue;
+        }
+
+        temp << id << "," << name << "," << age << ","
+             << gender << "," << contact << "," << disease << endl;
+    }
+
+    file.close();
+    temp.close();
+
+    remove("patients.csv");
+    rename("temp.csv", "patients.csv");
+
+    if (found)
+        cout << "Patient record deleted successfully.\n";
+    else
+        cout << "Patient not found.\n";
+}
