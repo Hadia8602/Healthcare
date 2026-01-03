@@ -110,3 +110,37 @@ void updateLabTest() {
     else
         cout << "Test ID not found.\n";
 }
+void deleteLabTest() {
+    ifstream file("labreport.csv");
+    ofstream temp("temp.csv");
+    string searchtestid;
+    cout << "Enter test ID to delete: ";
+    cin >> searchtestid;
+    cin.ignore();
+    string testid, patientname, testname, testdate, status;
+    bool exist = false;
+
+    while(getline(file, testid, ',') &&
+          getline(file, patientname, ',') &&
+          getline(file, testname, ',') &&
+          getline(file, testdate, ',') &&
+          getline(file, status)) 
+    {
+        if(testid == searchtestid) {
+            exist = true;
+            continue; // skip writing this record
+        }
+        temp << testid << "," << patientname << "," << testname << ","
+             << testdate << "," << status << endl;
+    }
+
+    file.close();
+    temp.close();
+    remove("labreport.csv");
+    rename("temp.csv", "labreport.csv");
+
+    if(exist)
+        cout << "Lab test deleted successfully.\n";
+    else
+        cout << "Test ID not found.\n";
+}
