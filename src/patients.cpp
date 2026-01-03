@@ -35,3 +35,43 @@ void addPatient()
     file.close();
     cout << "Patient added successfully.\n";
 }
+
+void viewPatient() {
+    ifstream file("patients.csv"); 
+    string id, name, age, gender, contact, disease, searchId;
+    bool found = false;
+
+    if (!file.is_open()) {
+        cout << "Error: Could not open database.\n";
+        return;
+    }
+
+    cout << "Enter Patient ID to search: ";
+    cin >> searchId;
+
+    while (getline(file, id, ',')) {
+        getline(file, name, ',');
+        getline(file, age, ',');
+        getline(file, gender, ',');
+        getline(file, contact, ',');
+        getline(file, disease); 
+
+        if (id == searchId) {
+            found = true;
+            cout << "\n--- Patient Record Found ---" << endl;
+            cout << "ID:      " << id << endl;
+            cout << "Name:    " << name << endl;
+            cout << "Age:     " << age << endl;
+            cout << "Gender:  " << gender << endl;
+            cout << "Contact: " << contact << endl;
+            cout << "Disease: " << disease << endl;
+            break; 
+        }
+    }
+
+    file.close();
+
+    if (!found) {
+        cout << "Patient not found.\n";
+    }
+}
