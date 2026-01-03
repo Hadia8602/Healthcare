@@ -86,4 +86,55 @@ void deleteDoctor() {
         cout << "Doctor Not Found!\n";
 }
 
+void updateDoctor() {
+    ifstream file("doctors.csv");
+    ofstream temp("temp.csv");
+
+    int id, did;
+    string name, education, specialization, category;
+    bool found = false;
+    string line;
+
+    cout << "Enter Doctor ID to update: ";
+    cin >> id;
+
+    while (getline(file, line)) {
+        stringstream ss(line);
+        ss >> did;
+
+        if (did == id) {
+            found = true;
+
+            cout << "Enter New Name: ";
+            cin >> name;
+
+            cout << "Enter New Education: ";
+            cin >> education;
+
+            cout << "Enter New Specialization: ";
+            cin >> specialization;
+
+            cout << "Enter New Category: ";
+            cin >> category;
+
+            temp << id << "," << name << "," << education << ","
+                 << specialization << "," << category << "\n";
+        } else {
+            temp << line << endl;
+        }
+    }
+
+    file.close();
+    temp.close();
+
+    remove("doctors.csv");
+    rename("temp.csv", "doctors.csv");
+
+    if (found)
+        cout << "Doctor Updated Successfully!\n";
+    else
+        cout << "Doctor Not Found!\n";
+}
+
+
 
