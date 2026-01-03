@@ -43,3 +43,87 @@ void viewAppointment() {
     }
     file.close();
 }
+void updateAppointment() {
+    string searchid, line;
+    cout << "Enter Appointment ID to update: ";
+    getline(cin, searchid);
+
+    ifstream file("appointmentrecord.csv");
+    if (!file) {
+        cout << "Error opening file"<<endl;
+        return;
+    }
+    ofstream temp("temp.csv");
+    bool found = false;
+    while (getline(file, line)) {
+        string id, patientname, docname, date, time, status;
+        stringstream ss(line);
+        getline(ss, id, ',');
+        getline(ss, patientname, ',');
+        getline(ss, docname, ',');
+        getline(ss, date, ',');
+        getline(ss, time, ',');
+        getline(ss, status, ',');
+
+        if (id == searchid) {
+            cout << "Enter Patient Name: ";
+            getline(cin, patientname);
+            cout << "Enter Doctor Name: ";
+            getline(cin, docname);
+            cout << "Enter Date (dd/mm/yy): ";
+            getline(cin, date);
+            cout << "Enter Time: ";
+            getline(cin, time);
+            status = "Scheduled";
+
+            temp << id << "," << patientname << "," << docname << ","<< date << "," << time << "," << status << endl;
+            found = true;
+        } else {
+            temp << line << endl;
+        }
+    }
+    file.close();
+    temp.close();
+
+    remove("appointmentrecord.csv");
+    rename("temp.csv", "appointmentrecord.csv");
+
+    if (found)
+        cout << "Appointment updated successfully"<<endl;
+    else
+        cout << "Appointment ID not found"<<endl;
+}
+void deleteAppointment() {
+    string searchid, line;
+    cout << "Enter Appointment ID to delete: ";
+    getline(cin, searchid);
+
+    ifstream file("appointmentrecord.csv");
+    if (!file) {
+        cout << "Error opening file"<<endl;
+        return;
+    }
+    ofstream temp("temp.csv");
+    bool found = false;
+    while (getline(file, line)) {
+        string id;
+        stringstream ss(line);
+        getline(ss, id, ',');
+        if (id != searchid) {
+            temp << line << endl;
+        } else {
+            found = true;
+        }
+    }
+    file.close();
+    temp.close();
+    remove("appointmentrecord.csv");
+    rename("temp.csv", "appointmentrecord.csv");
+
+    if (found)
+        cout << "Appointment deleted successfully"<<endl;
+    else
+        cout << "Appointment ID not found"<<endl;
+}
+
+
