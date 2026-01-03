@@ -30,4 +30,12 @@ void addLabTest() {
     fout.close();
     cout << "Lab test records added successfully!\n";
 }
-
+void viewLabTest() {
+    ifstream fin("labreport.csv");
+    string line;
+    cout << "\n--- Lab Test Records ---\n";
+    while(getline(fin, line)) {
+        cout << line << endl;
+    }
+    fin.close();
+}
