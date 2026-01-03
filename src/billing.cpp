@@ -127,7 +127,10 @@ void updateBill()
         cout << "Bill updated successfully!\n";
     else
         cout << "Bill ID not found!\n";
-}void deleteBill()
+}
+
+
+void deleteBill()
 {
     ifstream file("billing.csv");
     ofstream temp("temp.csv");
@@ -170,6 +173,43 @@ void updateBill()
     rename("temp.csv", "billing.csv");
 
     cout << "Bill deleted successfully!\n";
+}[4:22 PM, 1/3/2026] Hadia: void billingMenu()
+{
+    int choice;
+    do
+    {
+        cout << "\n===== Hospital Billing System =====\n";
+        cout << "1 - Add Bill\n";
+        cout << "2 - View Bills\n";
+        cout << "3 - Update Bill\n";
+        cout << "4 - Delete Bill\n";
+        cout << "5 - Exit\n";
+        cout << "Enter choice: ";
+        cin >> choice;
+        cin.ignore();
+
+        switch(choice)
+        {
+            case 1: addBill(); break;
+            case 2: viewBill(); break;
+            case 3: updateBill(); break;
+            case 4: deleteBill(); break;
+            case 5: cout << "Exiting...\n"; break;
+            default: cout << "Invalid choice!\n";
+        }
+    } while(choice != 5);
 }
+ #ifndef BILLING_H
+#define BILLING_H
+
+void addBill();
+void viewBill();
+void updateBill();
+void deleteBill();
+void billingMenu();
+
+#endif
+
+
 
 
