@@ -144,3 +144,8 @@ void deleteLabTest() {
     else
         cout << "Test ID not found.\n";
 }
+void clearLabRecords() {
+    ofstream fout("labreport.csv");
+    fout.close();
+    cout << "All lab test records cleared.\n";
+}
