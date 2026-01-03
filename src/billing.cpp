@@ -46,3 +46,15 @@ void addBill()
     cout << "Bill added successfully!\n";
 }
 
+void viewBill()
+{
+    ifstream file("billing.csv");
+    string line;
+
+    cout << "\nBillID,Name,Service,Doctor,Pharmacy,Lab,Room,Total\n";
+    while(getline(file, line))
+    {
+        cout << line << endl;
+    }
+    file.close();
+}
