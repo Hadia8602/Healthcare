@@ -68,3 +68,59 @@ void edit() {
         cout << "invalid name!\n";
 }
 
+void del() {
+    string line, name_to_del, noOfTablets, expiry_date, mg, name;
+    cout << "Enter the name of medicine you want to delete: ";
+    getline(cin, name_to_del);
+
+    bool found = false;
+    ifstream file("pharmacy.csv");
+    ofstream temp("temp.csv");
+
+    while (getline(file, line)) {
+        stringstream ss(line);
+        getline(ss, noOfTablets, ',');
+        getline(ss, name, ',');
+        getline(ss, mg, ',');
+        getline(ss, expiry_date, ',');
+        if (name_to_del == name) {
+            found = true;
+            continue;
+        }
+        temp << line << "\n";
+    }
+
+    file.close();
+    temp.close();
+    remove("pharmacy.csv");
+    rename("temp.csv", "pharmacy.csv");
+
+    if (found)
+        cout << "medicine deleted successfully\n";
+    else
+        cout << "invalid name!\n";
+}
+void pharmacyMenu() {
+    char choice;
+    do {
+        cout << "\n1. Add new medicine";
+        cout << "\n2. Edit medicine";
+        cout << "\n3. Delete medicine";
+        cout << "\n4. View all medicines";
+        cout << "\n5. Exit";
+        cout << "\nEnter your choice: ";
+        cin >> choice;
+        cin.ignore();
+
+        switch(choice) {
+            case '1': add(); break;
+            case '2': edit(); break;
+            case '3': del(); break;
+            case '4': view(); break;
+            case '5': cout << "Exiting menu...\n"; break;
+            default: cout << "Invalid choice!\n"; break;
+        }
+    } while(choice != '5');
+}
+
+
