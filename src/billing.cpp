@@ -173,7 +173,9 @@ void deleteBill()
     rename("temp.csv", "billing.csv");
 
     cout << "Bill deleted successfully!\n";
-}[4:22 PM, 1/3/2026] Hadia: void billingMenu()
+}
+
+void billingMenu()
 {
     int choice;
     do
