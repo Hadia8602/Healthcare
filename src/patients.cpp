@@ -158,3 +158,24 @@ void deletePatient()
     else
         cout << "Patient not found.\n";
 }
+
+void patientMenu()
+{
+    int choice;
+    do {
+        cout << "\n===== Patient Management Menu =====\n";
+        cout << "1. Add Patient\n2. View Patient\n3. Update Patient\n"
+             << "4. Delete Patient\n0. Back to Main Menu\n";
+        cout << "Enter choice: ";
+        cin >> choice;
+        cin.ignore();
+        switch(choice) {
+            case 1: addPatient(); break;
+            case 2: viewPatient(); break;
+            case 3: updatePatient(); break;
+            case 4: deletePatient(); break;
+            case 0: break;
+            default: cout << "Invalid choice!\n";
+        }
+    } while(choice != 0);
+}
