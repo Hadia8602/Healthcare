@@ -23,11 +23,23 @@ void addAppointment() {
 
     ofstream file("appointmentrecord.csv", ios::app);
     if (!file) {
-        cout << "Error opening file\n";
+        cout << "Error opening file"<<endl;
         return;
     }
     file << id << "," << patientname << "," << docname << ","<< date << "," << time << "," << status << endl;
 
     file.close();
     cout << "Appointment added successfully"<<endl;
+}
+void viewAppointment() {
+    ifstream file("appointmentrecord.csv");
+    if (!file) {
+        cout << "Error opening file"<<endl;
+        return;
+    }
+    string line;
+    while (getline(file, line)) {
+        cout << line << endl;
+    }
+    file.close();
 }
