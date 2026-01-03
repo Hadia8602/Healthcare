@@ -100,5 +100,27 @@ void del() {
     else
         cout << "invalid name!\n";
 }
+void pharmacyMenu() {
+    char choice;
+    do {
+        cout << "\n1. Add new medicine";
+        cout << "\n2. Edit medicine";
+        cout << "\n3. Delete medicine";
+        cout << "\n4. View all medicines";
+        cout << "\n5. Exit";
+        cout << "\nEnter your choice: ";
+        cin >> choice;
+        cin.ignore();
+
+        switch(choice) {
+            case '1': add(); break;
+            case '2': edit(); break;
+            case '3': del(); break;
+            case '4': view(); break;
+            case '5': cout << "Exiting menu...\n"; break;
+            default: cout << "Invalid choice!\n"; break;
+        }
+    } while(choice != '5');
+}
 
 
