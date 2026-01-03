@@ -93,4 +93,37 @@ void updateAppointment() {
     else
         cout << "Appointment ID not found"<<endl;
 }
+void deleteAppointment() {
+    string searchid, line;
+    cout << "Enter Appointment ID to delete: ";
+    getline(cin, searchid);
+
+    ifstream file("appointmentrecord.csv");
+    if (!file) {
+        cout << "Error opening file"<<endl;
+        return;
+    }
+    ofstream temp("temp.csv");
+    bool found = false;
+    while (getline(file, line)) {
+        string id;
+        stringstream ss(line);
+        getline(ss, id, ',');
+        if (id != searchid) {
+            temp << line << endl;
+        } else {
+            found = true;
+        }
+    }
+    file.close();
+    temp.close();
+    remove("appointmentrecord.csv");
+    rename("temp.csv", "appointmentrecord.csv");
+
+    if (found)
+        cout << "Appointment deleted successfully"<<endl;
+    else
+        cout << "Appointment ID not found"<<endl;
+}
+
 
