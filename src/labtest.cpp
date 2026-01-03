@@ -149,3 +149,24 @@ void clearLabRecords() {
     fout.close();
     cout << "All lab test records cleared.\n";
 }
+void labTestMenu() {
+    int choice;
+    do {
+        cout << "\n===== Lab Test Menu =====\n";
+        cout << "1. Add Lab Test\n2. View Lab Tests\n3. Edit Lab Test\n"
+             << "4. Update Lab Test\n5. Delete Lab Test\n6. Clear Records\n0. Back to Main Menu\n";
+        cout << "Enter choice: ";
+        cin >> choice;
+        cin.ignore();
+        switch(choice) {
+            case 1: addLabTest(); break;
+            case 2: viewLabTest(); break;
+            case 3: editLabTest(); break;
+            case 4: updateLabTest(); break;
+            case 5: deleteLabTest(); break;
+            case 6: clearLabRecords(); break;
+            case 0: break;
+            default: cout << "Invalid choice!\n";
+        }
+    } while(choice != 0);
+}
