@@ -9,3 +9,4 @@ This is a healthcare management system developed as a course project.
 - **MariaB8602** – Lab test management module
 - **fatimafal830098-coder** – billing system
 - **sawerat70-code** – doctors management system
+- **imza-s988** –  staff management system 
