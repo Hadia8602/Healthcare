@@ -85,3 +85,76 @@ void deleteDoctor() {
     else
         cout << "Doctor Not Found!\n";
 }
+void updateDoctor() {
+    ifstream file("doctors.csv");
+    ofstream temp("temp.csv");
+
+    int id, did;
+    string name, education, specialization, category;
+    bool found = false;
+    string line;
+
+    cout << "Enter Doctor ID to update: ";
+    cin >> id;
+
+    while (getline(file, line)) {
+        stringstream ss(line);
+        ss >> did;
+
+        if (did == id) {
+            found = true;
+
+            cout << "Enter New Name: ";
+            cin >> name;
+
+            cout << "Enter New Education: ";
+            cin >> education;
+
+            cout << "Enter New Specialization: ";
+            cin >> specialization;
+
+            cout << "Enter New Category: ";
+            cin >> category;
+
+            temp << id << "," << name << "," << education << ","
+                 << specialization << "," << category << "\n";
+        } else {
+            temp << line << endl;
+        }
+    }
+
+    file.close();
+    temp.close();
+
+    remove("doctors.csv");
+    rename("temp.csv", "doctors.csv");
+
+    if (found)
+        cout << "Doctor Updated Successfully!\n";
+    else
+        cout << "Doctor Not Found!\n";
+}
+
+void doctorMenu() {
+    int choice;
+
+    do {
+        cout << "\n===== Doctor Management System =====\n";
+        cout << "1. Add Doctor\n";
+        cout << "2. View Doctors\n";
+        cout << "3. Update Doctor\n";
+        cout << "4. Delete Doctor\n";
+        cout << "5. Back to Main Menu\n";
+        cout << "Enter Choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1: addDoctor(); break;
+            case 2: viewDoctor(); break;
+            case 3: updateDoctor(); break;
+            case 4: deleteDoctor(); break;
+            case 5: break;
+            default: cout << "Invalid Choice!\n";
+        }
+    } while (choice != 5);
+}
