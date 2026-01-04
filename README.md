@@ -10,3 +10,4 @@ This is a healthcare management system developed as a course project.
 - **fatimafal830098-coder** – billing system
 - **sawerat70-code** – doctors management system
 - **imza-s988** –  staff management system 
+- **hafizaatiairshad** – room management system
